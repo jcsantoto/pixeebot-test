@@ -3,7 +3,6 @@ from flask_login import current_user, login_required
 import pdfkit, json
 import pdfkit
 from bson.objectid import ObjectId
-import random
 import time
 
 import src.search as recipe_search
@@ -15,6 +14,7 @@ from src.recipe_info import Recipe, contains_intolerances
 from src.recipe_info_util import clean_summary
 from src.user_recipes import UserRecipe, decompress_data
 from src.recipe_recommend import get_similar_recipe
+import secrets
 
 
 views = Blueprint('views', __name__, template_folder="../templates", static_folder="../static")
@@ -469,7 +469,7 @@ def generate_recommendations():
     favorites = current_user.favorites['favorites']
 
     if favorites:
-        recipe_name = random.choice(list(favorites.values()))
+        recipe_name = secrets.SystemRandom().choice(list(favorites.values()))
 
         extracted_recipes = []
 

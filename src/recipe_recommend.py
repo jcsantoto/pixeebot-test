@@ -1,7 +1,7 @@
 import requests
-import random
 import string
 from src.search_builder import RecipeSearch
+import secrets
 
 APIKEY = "b9f570c04c8a44229ffd38618ddfabe2"
 
@@ -11,7 +11,7 @@ def get_similar_recipe(recipe_name: str):
     recipe_name = recipe_name.translate(str.maketrans('', '', string.punctuation))
 
     keywords = recipe_name.split(" ")
-    random_keyword = random.sample(keywords, 2)
+    random_keyword = secrets.SystemRandom().sample(keywords, 2)
     query = " ".join(random_keyword)
 
     search = RecipeSearch()
